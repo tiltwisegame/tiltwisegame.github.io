@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Get Tiltwise</title>
+  <meta name="description" content="Tiltwise: tilt the board, roll every marble home. Free on the App Store.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="icon.png">
+  <style>
+    main { text-align: center; padding-top: 12vh; }
+    .icon { width: 120px; height: 120px; border-radius: 28px; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+    h1 { margin: 20px 0 6px; }
+    .get { display: block; margin: 28px auto 12px; max-width: 360px; background: var(--ink); color: var(--bg);
+           padding: 18px 22px; border-radius: 18px; font-size: 21px; font-weight: 800; text-decoration: none; }
+    .small { font-size: 15px; }
+  </style>
+</head>
+<body>
+<main>
+  <img class="icon" src="icon.png" alt="Tiltwise app icon">
+  <h1>Tiltwise</h1>
+  <p class="muted">Tilt the board. Roll every marble home.<br>400 levels, no lives, free.</p>
+  <a class="get" id="get" href="https://apps.apple.com/app/apple-store/id6817270749?pt=129531525&amp;ct=site_get&amp;mt=8">Get it on the App Store</a>
+  <p class="small"><a id="web" href="https://apps.apple.com/app/apple-store/id6817270749?pt=129531525&amp;ct=site_get&amp;mt=8">Open the App Store page</a></p>
+</main>
+<script>
+  // Ads link here with ?ct=<campaign> so App Store Connect can still attribute downloads per ad.
+  // On iPhone the itms-apps:// link opens the App Store app itself (skipping the in-app browser's web preview);
+  // try it right away, and keep the big button as the one-tap fallback.
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var ct = (q.get("ct") || "site_get").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40) || "site_get";
+    var path = "apps.apple.com/app/apple-store/id6817270749?pt=129531525&ct=" + ct + "&mt=8";
+    var web = "https://" + path, app = "itms-apps://" + path;
+    var ios = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+              (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    document.getElementById("web").href = web;
+    document.getElementById("get").href = ios ? app : web;
+    if (ios) { setTimeout(function () { location.href = app; }, 60); }
+  })();
+</script>
+</body>
+</html>
